@@ -414,11 +414,8 @@
     .web-intro-meta span:last-child { color: var(--muted); }
     .web-intro-index { display: flex; align-items: baseline; gap: 8px; color: var(--coral); font-family: var(--display); font-size: 42px; }
     .web-intro-index i { max-width: 70px; color: var(--muted); font-family: var(--mono); font-size: 8px; font-style: normal; text-transform: uppercase; }
-    .web-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 26px 14px; }
+    .web-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 14px; }
     .web-case { min-width: 0; perspective: 1100px; }
-    .web-case:nth-child(1), .web-case:nth-child(4) { grid-column: span 7; }
-    .web-case:nth-child(2), .web-case:nth-child(3) { grid-column: span 5; }
-    .web-case:nth-child(5) { grid-column: 3 / span 8; }
 
     .web-artwork { position: relative; overflow: hidden; border: 1px solid var(--line); background: var(--preview-bg); box-shadow: 0 18px 45px rgba(0,0,0,.18); transform: perspective(1100px) rotateX(var(--case-tilt-x, 0deg)) rotateY(var(--case-tilt-y, 0deg)); transform-style: preserve-3d; transition: transform .35s ease, box-shadow .35s ease; }
     .web-artwork img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; transition: transform .55s cubic-bezier(.18,.75,.25,1), filter .35s; }
@@ -745,12 +742,12 @@
     <section class="web-section" aria-labelledby="web-title">
       <div class="section-head">
         <div><p class="section-kicker">03 / Selected digital experiences</p><h2 id="web-title">Web Development</h2></div>
-        <p class="section-aside">Brand-led websites · Product experiences</p>
+        <p class="section-aside">13 original website case studies</p>
       </div>
       <div class="web-intro reveal-item">
         <p>Distinct worlds.<br><strong>One clear digital point of view.</strong></p>
         <div class="web-intro-meta"><span>Brand translated to screen</span><span>Story / Structure / Detail</span></div>
-        <span class="web-intro-index" aria-hidden="true">05 <i>Selected experiences</i></span>
+        <span class="web-intro-index" aria-hidden="true">13 <i>Selected experiences</i></span>
       </div>
       <div class="web-grid" id="web-grid"></div>
     </section>
@@ -825,11 +822,19 @@
     ];
 
     const webProjects = [
-      { brand: "AURÉLIA", title: "Purity. Elegance. Eternally imbued.", eyebrow: "Natural mineral water", description: "A quiet, editorial storefront for water sourced from ancient alpine springs.", theme: "water", image: "w1.png" },
-      { brand: "AZZURRO", title: "Where time becomes unforgettable.", eyebrow: "Amalfi coast / Italy", description: "An immersive stay experience, from cliffside suites to effortless booking.", theme: "resort", image: "w2.png" },
-      { brand: "NEXORA", title: "Intelligence that elevates everyday.", eyebrow: "Smart living, simply", description: "A clear product story for connected homes and thoughtful automation.", theme: "smart", image: "w3.png" },
-      { brand: "AZUREA", title: "Your private paradise, redefined.", eyebrow: "Private island / Maldives", description: "A destination-led experience for overwater stays and island escapes.", theme: "island", image: "w4.png" },
-      { brand: "SKYVA", title: "The future is personal.", eyebrow: "Next-generation mobility", description: "A cinematic launch experience for a new era of personal transportation.", theme: "mobility", image: "w5.png" }
+      { brand: "AURORA PROPERTIES", title: "Elevating Luxury Real Estate Online.", eyebrow: "Luxury Real Estate", description: "A refined property experience built around exceptional homes and locations.", theme: "resort", image: "website_pof/Image 1.png" },
+      { brand: "VITALIS", title: "Digital Healthcare Experiences That Build Trust.", eyebrow: "Health & Wellness", description: "A patient-first digital platform for care, appointments, and ongoing wellness.", theme: "water", image: "website_pof/Image 2.png" },
+      { brand: "ELEVATE TRAVEL", title: "Curated Journeys. Timeless Memories.", eyebrow: "Luxury Travel", description: "A tailored travel experience for discovering destinations and planning a stay.", theme: "island", image: "website_pof/Image 3.png" },
+      { brand: "LUMIÈRE", title: "Digital Indulgence. Timeless Experience.", eyebrow: "Fine Dining", description: "An elegant restaurant experience centered on its menu, atmosphere, and reservations.", theme: "resort", image: "website_pof/Image 4.png" },
+      { brand: "VELORA PARFUMS", title: "Crafted Scents. Timeless Elegance.", eyebrow: "Luxury Fragrance", description: "A rich product story for a fragrance house and its signature collections.", theme: "water", image: "website_pof/Image 5 (1).png" },
+      { brand: "AZZURRO", title: "A Digital Experience as Exceptional as the Destination.", eyebrow: "Resort & Residences", description: "A destination-led stay experience for the Amalfi Coast, from suites to dining.", theme: "resort", image: "website_pof/Image 6.png" },
+      { brand: "LUMÉRA", title: "Elevating Beauty into an Unforgettable Experience.", eyebrow: "Beauty & Cosmetics", description: "A polished beauty storefront for collections, product discovery, and personalized care.", theme: "water", image: "website_pof/Image 7.png" },
+      { brand: "MOMOCHI", title: "Bringing Joy to Life, One Hug at a Time.", eyebrow: "Toys & Collectibles", description: "A playful shopping experience for plush characters, gifts, and collector favorites.", theme: "island", image: "website_pof/Image 8.png" },
+      { brand: "VELORA CHOCOLATIER", title: "Crafted to Delight. Made to Be Remembered.", eyebrow: "Food & Beverage", description: "An indulgent storefront for artisan chocolate, seasonal gifts, and signature collections.", theme: "resort", image: "website_pof/Image 9.png" },
+      { brand: "ATELIER CASA", title: "Crafted for Timeless Living.", eyebrow: "Luxury Furniture", description: "A considered home collection experience focused on materials, rooms, and craftsmanship.", theme: "water", image: "website_pof/Image 11.png" },
+      { brand: "NEXORA", title: "Intelligent Living. Seamlessly Connected.", eyebrow: "Smart Home Technology", description: "A connected-home product story for smart devices, routines, and automation.", theme: "smart", image: "website_pof/Image 13.png" },
+      { brand: "VANTAGE ATELIER", title: "Vision. Refined. Luxury Defined.", eyebrow: "Luxury Eyewear", description: "An editorial shopping experience for handcrafted eyewear and considered style.", theme: "resort", image: "website_pof/Image 14.png" },
+      { brand: "DOLCÉ", title: "Crafted Joy. Made to Delight.", eyebrow: "Dessert & Ice Cream", description: "A bright dessert storefront celebrating small-batch flavors and joyful treats.", theme: "island", image: "website_pof/Image 15.png" }
     ];
 
     const mobileProjects = [
