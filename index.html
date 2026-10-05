@@ -502,6 +502,11 @@
     .app-feature-count { flex: 0 0 auto; color: var(--app-accent); font-family: var(--mono); font-size: 8px; text-align: right; text-transform: uppercase; }
     .app-feature-list { display: flex; flex-wrap: wrap; gap: 6px 12px; padding: 0 0 11px; color: var(--app-muted); font-family: var(--mono); font-size: 7px; text-transform: uppercase; }
     .app-feature-list i { margin-right: 4px; color: var(--app-accent); font-style: normal; }
+    .app-image-frame { position: relative; overflow: hidden; border: 1px solid color-mix(in srgb, var(--app-accent) 28%, transparent); background: var(--app-stage); aspect-ratio: 3 / 2; }
+    .app-project-image { display: block; width: 100%; height: 100%; object-fit: contain; transition: transform .55s cubic-bezier(.18,.75,.25,1), filter .35s; }
+    .app-project:hover .app-project-image { transform: scale(1.025); filter: saturate(1.04); }
+    .app-image-caption { position: absolute; right: 10px; bottom: 9px; padding: 5px 7px; color: var(--app-ink); background: color-mix(in srgb, var(--app-panel) 82%, transparent); font-family: var(--mono); font-size: 7px; text-transform: uppercase; opacity: 0; translate: 0 4px; transition: opacity .25s, translate .25s; }
+    .app-project:hover .app-image-caption { opacity: 1; translate: 0 0; }
     .app-device-stage { position: relative; height: 312px; overflow: hidden; isolation: isolate; background: var(--app-stage); }
     .app-device-stage::before { position: absolute; inset: auto 8% -52% 8%; height: 83%; border: 1px solid color-mix(in srgb, var(--app-accent) 22%, transparent); border-radius: 50%; content: ""; }
     .app-device-stage::after { position: absolute; inset: 0; z-index: 5; background: linear-gradient(90deg, var(--app-stage), transparent 12%, transparent 88%, var(--app-stage)); content: ""; pointer-events: none; }
@@ -828,6 +833,14 @@
       { brand: "YACHTLUXE", title: "Beyond extraordinary.", category: "Travel / Yacht Charter", description: "A premium charter experience from destination discovery through date selection and booking.", theme: "yacht", mark: "Y", features: ["Destination discovery", "Charter availability", "Concierge planning"], screens: [{ label: "DISCOVER", title: "Find your perfect escape.", description: "Private charters, selected for you.", cta: "Explore destinations", scene: "Y", rows: ["Popular destinations", "Featured yachts"] }, { label: "YACHT DETAILS", title: "Lady S", description: "60 m · 8 cabins · Mediterranean", cta: "Check availability", scene: "01", rows: ["Guests and amenities", "From $120,000 / week"] }, { label: "BOOKING SUMMARY", title: "Your time on the water.", description: "Choose dates and shape your journey.", cta: "Continue to payment", scene: "Y", rows: ["Jun 25 - Jul 02", "7 nights · 12 guests"] }] }
     ];
 
+    const mobileImages = [
+      "brewvana.png.png",
+      "eventora.png.png",
+      "luxe-beauty.png.png",
+      "haven.png.png",
+      "yachtluxe.png.png"
+    ];
+
     const channelGrid = document.querySelector("#channel-grid");
     const workGrid = document.querySelector("#work-grid");
     const workCount = document.querySelector("#work-count");
@@ -954,27 +967,10 @@
       });
     }
 
-    function renderAppPhone(project, screen, position) {
-      return `
-        <div class="app-phone app-phone--${position}">
-          <div class="app-phone-screen">
-            <div class="app-status"><span>9:41</span><span class="app-status-icons">LTE&nbsp; 100%</span></div>
-            <div class="app-screen-nav"><strong class="app-screen-brand">${project.mark} ${project.brand}</strong><span class="app-screen-action">SAVE</span></div>
-            <span class="app-screen-eyebrow">${screen.label}</span>
-            <h4 class="app-screen-title">${screen.title}</h4>
-            <p class="app-screen-copy">${screen.description}</p>
-            <div class="app-screen-scene"><span class="app-scene-object">${screen.scene}</span></div>
-            <div class="app-screen-rows">${screen.rows.map((row) => `<div class="app-screen-row"><span>${row}</span><small>OPEN</small></div>`).join("")}</div>
-            <span class="app-screen-cta">${screen.cta}</span>
-            <span class="app-screen-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-          </div>
-        </div>`;
-    }
-
     function renderMobileApps() {
       const appGrid = document.querySelector("#app-grid");
       appGrid.innerHTML = mobileProjects.map((project, index) => `
-        <article class="app-project app-theme-${project.theme}${project.wide ? " is-wide" : ""} reveal-item">
+        <article class="app-project app-theme-${project.theme} reveal-item">
           <div class="app-project-panel" style="--reveal-delay:${(index % 3) * 70}ms">
             <div class="app-project-head">
               <div><span class="app-brand">0${index + 1} / ${project.brand}</span><h3 class="app-project-title">${project.title}</h3></div>
@@ -982,10 +978,9 @@
             </div>
             <div class="app-project-copy"><p>${project.description}</p><span class="app-feature-count">0${project.features.length}<br>Key flows</span></div>
             <div class="app-feature-list">${project.features.map((feature) => `<span><i aria-hidden="true">+</i>${feature}</span>`).join("")}</div>
-            <div class="app-device-stage" aria-label="${project.brand} app screens">
-              ${renderAppPhone(project, project.screens[0], "left")}
-              ${renderAppPhone(project, project.screens[1], "main")}
-              ${renderAppPhone(project, project.screens[2], "right")}
+            <div class="app-image-frame">
+              <img class="app-project-image" src="${encodeURI(mobileImages[index])}" alt="${project.brand} mobile app portfolio design" loading="lazy">
+              <span class="app-image-caption">Original app design</span>
             </div>
           </div>
         </article>`).join("");
