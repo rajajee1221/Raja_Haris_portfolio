@@ -420,6 +420,13 @@
     .web-case:nth-child(2), .web-case:nth-child(3) { grid-column: span 5; }
     .web-case:nth-child(5) { grid-column: 3 / span 8; }
 
+    .web-artwork { position: relative; overflow: hidden; border: 1px solid var(--line); background: var(--preview-bg); box-shadow: 0 18px 45px rgba(0,0,0,.18); transform: perspective(1100px) rotateX(var(--case-tilt-x, 0deg)) rotateY(var(--case-tilt-y, 0deg)); transform-style: preserve-3d; transition: transform .35s ease, box-shadow .35s ease; }
+    .web-artwork img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; transition: transform .55s cubic-bezier(.18,.75,.25,1), filter .35s; }
+    .web-artwork-label { position: absolute; right: 10px; bottom: 10px; padding: 6px 8px; color: var(--preview-ink, #f4f4ec); background: color-mix(in srgb, var(--preview-bg) 84%, transparent); font-family: var(--mono); font-size: 8px; text-transform: uppercase; opacity: 0; translate: 0 5px; transition: opacity .25s ease, translate .25s ease; }
+    .web-case:hover .web-artwork { box-shadow: 0 28px 54px rgba(0,0,0,.34), 0 0 0 1px rgba(210,255,75,.2); }
+    .web-case:hover .web-artwork img { transform: scale(1.025); filter: saturate(1.04); }
+    .web-case:hover .web-artwork-label { opacity: 1; translate: 0 0; }
+
     .browser-preview {
       overflow: hidden;
       border: 1px solid var(--line);
@@ -818,11 +825,11 @@
     ];
 
     const webProjects = [
-      { brand: "AURÉLIA", title: "Purity. Elegance. Eternally imbued.", eyebrow: "Natural mineral water", description: "A quiet, editorial storefront for water sourced from ancient alpine springs.", theme: "water", scene: "bottle", address: "aurelia-water.com", links: "OUR STORY · SOURCES · COLLECTION · WELLNESS", details: ["Pure by nature", "Still water", "Explore collection"] },
-      { brand: "AZZURRO", title: "Where time becomes unforgettable.", eyebrow: "Amalfi coast / Italy", description: "An immersive stay experience, from cliffside suites to effortless booking.", theme: "resort", scene: "hotel", address: "azzurro-resort.com", links: "STAY · EXPERIENCES · DINING · WELLNESS", details: ["Amalfi coast", "Private suites", "Reserve your stay"] },
-      { brand: "NEXORA", title: "Intelligence that elevates everyday.", eyebrow: "Smart living, simply", description: "A clear product story for connected homes and thoughtful automation.", theme: "smart", scene: "panel", address: "nexora-living.com", links: "PRODUCTS · SOLUTIONS · AUTOMATION · SUPPORT", details: ["Home ecosystem", "Smart control", "Designed for living"] },
-      { brand: "AZUREA", title: "Your private paradise, redefined.", eyebrow: "Private island / Maldives", description: "A destination-led experience for overwater stays and island escapes.", theme: "island", scene: "palm", address: "azurea-island.com", links: "THE ISLAND · ACCOMMODATIONS · EXPERIENCES · DINING", details: ["Island stays", "Ocean villas", "Plan your escape"] },
-      { brand: "SKYVA", title: "The future is personal.", eyebrow: "Next-generation mobility", description: "A cinematic launch experience for a new era of personal transportation.", theme: "mobility", scene: "aircraft", address: "skyva-mobility.com", links: "VEHICLES · TECHNOLOGY · EXPERIENCES · ECOSYSTEM", details: ["Personal mobility", "Future, in motion", "Discover SKYVA"] }
+      { brand: "AURÉLIA", title: "Purity. Elegance. Eternally imbued.", eyebrow: "Natural mineral water", description: "A quiet, editorial storefront for water sourced from ancient alpine springs.", theme: "water", image: "w1.png" },
+      { brand: "AZZURRO", title: "Where time becomes unforgettable.", eyebrow: "Amalfi coast / Italy", description: "An immersive stay experience, from cliffside suites to effortless booking.", theme: "resort", image: "w2.png" },
+      { brand: "NEXORA", title: "Intelligence that elevates everyday.", eyebrow: "Smart living, simply", description: "A clear product story for connected homes and thoughtful automation.", theme: "smart", image: "w3.png" },
+      { brand: "AZUREA", title: "Your private paradise, redefined.", eyebrow: "Private island / Maldives", description: "A destination-led experience for overwater stays and island escapes.", theme: "island", image: "w4.png" },
+      { brand: "SKYVA", title: "The future is personal.", eyebrow: "Next-generation mobility", description: "A cinematic launch experience for a new era of personal transportation.", theme: "mobility", image: "w5.png" }
     ];
 
     const mobileProjects = [
@@ -934,16 +941,9 @@
       const webGrid = document.querySelector("#web-grid");
       webGrid.innerHTML = webProjects.map((project) => `
         <article class="web-case theme-${project.theme} reveal-item">
-          <div class="browser-preview">
-            <div class="browser-toolbar"><i class="browser-dot"></i><i class="browser-dot"></i><i class="browser-dot"></i><span class="browser-address">${project.address}</span></div>
-            <div class="site-preview">
-              <div class="site-nav"><strong class="site-brand">${project.brand}</strong><span class="site-nav-links">${project.links}</span><i class="site-nav-mark" aria-hidden="true"></i></div>
-              <div class="site-hero">
-                <div class="site-copy"><span class="site-eyebrow">${project.eyebrow}</span><h3>${project.title}</h3><p>${project.description}</p><span class="site-action">Discover the experience</span></div>
-                <div class="site-scene"><span class="scene-object ${project.scene}" aria-hidden="true"></span></div>
-              </div>
-              <div class="site-ribbon">${project.details.map((detail) => `<span>${detail}</span>`).join("")}</div>
-            </div>
+          <div class="web-artwork">
+            <img src="${encodeURI(project.image)}" alt="${project.brand} website design portfolio" loading="lazy">
+            <span class="web-artwork-label">${project.eyebrow} / Web experience</span>
           </div>
           <div class="case-meta"><h3>${project.brand}</h3><p>${project.eyebrow} · Web experience</p></div>
         </article>`).join("");
